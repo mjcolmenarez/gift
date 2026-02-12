@@ -1,0 +1,257 @@
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --bg:#f3efe6;
+  --paper:#f8f4ec;
+  --ink:#2c2926;
+  --muted:#8a7f73;
+  --cassette:#e4dac9;
+}
+
+body{
+  background:var(--bg);
+  font-family:'Cormorant Garamond', serif;
+  color:var(--ink);
+  overflow-x:hidden;
+}
+
+/* film grain */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:.05;
+  pointer-events:none;
+}
+
+/* vignette */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  box-shadow:inset 0 0 200px rgba(0,0,0,.15);
+  pointer-events:none;
+}
+
+.section{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:120px 20px;
+  opacity:0;
+  transform:translateY(60px);
+  transition:all 1.2s ease;
+}
+
+.section.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.page{
+  max-width:850px;
+  width:100%;
+}
+
+.center{text-align:center;}
+
+.cover h1{
+  font-family:'Playfair Display', serif;
+  font-size:3rem;
+  margin-bottom:20px;
+}
+
+.cover p{
+  color:var(--muted);
+  font-style:italic;
+}
+
+/* LETTER */
+.letter{
+  background:var(--paper);
+  padding:70px;
+  box-shadow:0 20px 40px rgba(0,0,0,.08);
+  transform:rotate(-1deg);
+  position:relative;
+}
+
+.letter::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  width:1px;
+  height:100%;
+  background:rgba(0,0,0,.05);
+}
+
+.letter h2{
+  font-family:'Great Vibes', cursive;
+  font-size:2.8rem;
+  margin-bottom:25px;
+}
+
+.signature{
+  margin-top:40px;
+  text-align:right;
+  font-family:'Great Vibes', cursive;
+  font-size:2rem;
+}
+
+/* TRACKLIST */
+.tracklist{
+  background:var(--paper);
+  padding:60px;
+  box-shadow:0 15px 35px rgba(0,0,0,.07);
+}
+
+.tracklist h3{
+  font-family:'Playfair Display', serif;
+  margin-bottom:30px;
+  letter-spacing:2px;
+}
+
+.track{margin-bottom:25px;}
+
+/* CONTACT SHEET */
+/* FILM ROLL */
+/* FILM ROLL */
+.film-roll{
+  display:flex;
+  flex-direction:column;
+  gap:100px;
+}
+
+.film-strip{
+  display:flex;
+  gap:30px;
+  padding:60px 40px;
+  background:#1a1a1a;
+  position:relative;
+  box-shadow:0 35px 80px rgba(0,0,0,.25);
+  transform:rotate(-1deg);
+  overflow:hidden;
+}
+
+.film-strip:nth-child(even){
+  transform:rotate(1deg);
+}
+
+/* perforation holes */
+.film-strip::before,
+.film-strip::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:100%;
+  height:28px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #1a1a1a 0px,
+      #1a1a1a 18px,
+      #2e2e2e 18px,
+      #2e2e2e 32px
+    );
+}
+
+.film-strip::before{
+  top:0;
+}
+
+.film-strip::after{
+  bottom:0;
+}
+
+/* bigger images */
+.film-strip img{
+  height:340px;   /* THIS makes it bigger */
+  object-fit:cover;
+  filter:grayscale(100%) contrast(1.1);
+  cursor:pointer;
+  transition:all .4s ease;
+}
+
+.film-strip img:hover{
+  filter:sepia(.35) contrast(1.05);
+  transform:translateY(-8px);
+}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  padding:40px;
+}
+
+.popup img{
+  max-width:500px;
+  width:100%;
+  filter:sepia(.4);
+  margin-bottom:20px;
+}
+
+.popup p{
+  font-family:'Great Vibes', cursive;
+  font-size:1.8rem;
+  color:white;
+}
+
+/* CASSETTE */
+.cassette{
+  width:600px;
+  height:330px;
+  background:var(--cassette);
+  box-shadow:0 25px 60px rgba(0,0,0,.15);
+  padding:30px;
+}
+
+.window{
+  background:#2b2b2b;
+  height:120px;
+  margin-bottom:20px;
+  position:relative;
+}
+
+.reel{
+  width:70px;
+  height:70px;
+  border:4px solid #ccc;
+  border-radius:50%;
+  position:absolute;
+  top:25px;
+  animation:spin 10s linear infinite;
+}
+
+.reel.left{ left:120px; }
+.reel.right{ right:120px; }
+
+@keyframes spin{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+.label{
+  background:var(--paper);
+  padding:15px;
+  text-align:center;
+}
+
+.flip{
+  margin-top:20px;
+  font-size:.9rem;
+  color:var(--muted);
+}
+
+.final{
+  font-family:'Playfair Display', serif;
+  font-size:2.2rem;
+  text-align:center;
+}
